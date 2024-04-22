@@ -33,11 +33,11 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    // 5초마다 페이지를 넘기는 타이머 설정
-    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+    // 3초마다 페이지를 넘기는 타이머 설정
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       int nextPage = (_pageController.page?.toInt() ?? 0) + 1;
       if (nextPage == 9) {
-        nextPage = 0; // 마지막 이미지가 끝나면 첫 이미지로 돌아갑니다.
+        nextPage = 0; // 마지막 이미지가 끝나면 첫 이미지로
       }
       _pageController.animateToPage(
         nextPage,
@@ -58,7 +58,7 @@ class _MainPageState extends State<MainPage> {
               /* 상단 바 */
               children: [
                 Icon(
-                  CupertinoIcons.chevron_back,
+                  CupertinoIcons.ellipsis,
                   size: 30,
                 )
               ],
@@ -96,7 +96,7 @@ class _MainPageState extends State<MainPage> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(top: 20.0, left: 16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text(
                 "인기 크리에이터",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
@@ -111,7 +111,7 @@ class _MainPageState extends State<MainPage> {
                 itemCount: 9 /* 빌드할 자식 위젯을 30개로*/,
                 itemBuilder: (context, index) /* 콜백 함수, 각 index에 자식 위젯 빌드 */ {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child:
@@ -125,6 +125,93 @@ class _MainPageState extends State<MainPage> {
                     ),
                   );
                 },
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Text(
+                    "인기 제품",
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "(기준 판매량)",
+                    style: TextStyle(fontSize: 12.0),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Image.asset(
+                            'assets/0${index + 1}.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Row(
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () {
+                                // 좋아요 기능넣기
+                              },
+                              icon: Icon(Icons.favorite),
+                              color: Colors.red,
+                            ),
+                            Text("32"),
+                            IconButton(
+                              onPressed: () {
+                                // 스크랩 기능 넣기
+                              },
+                              icon: Icon(Icons.bookmark_rounded),
+                              color: Colors.blue,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      size: 24,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      "더 많은 스타일!",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
