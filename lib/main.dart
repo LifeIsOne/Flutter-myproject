@@ -54,13 +54,16 @@ class _MainPageState extends State<MainPage> {
         slivers: [
           SliverAppBar(
             pinned: true,
-            title: Row(
-              /* 상단 바 */
+            title: Row /* 상단 바 */(
               children: [
                 Icon(
                   CupertinoIcons.chevron_back,
                   size: 30,
-                )
+                ),
+                IconButton(onPressed: () {
+                  print("비행기 누름");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyPage()));
+                }, icon: Icon(CupertinoIcons.airplane))
               ],
             ),
             /* 우츤 상단 아이콘*/
@@ -130,6 +133,28 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              color: Colors.red,
+              height: 200,
+            );
+          },
+        );
+      },
+      child: Text('Open Bottom Sheet'),
     );
   }
 }
