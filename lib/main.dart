@@ -148,15 +148,16 @@ class _MainPageState extends State<MainPage> {
           ),
           SliverToBoxAdapter(
             child: SizedBox(
+              height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       children: [
-                        SizedBox(
+                        SizedBox /* 사진 */ (
                           width: 150,
                           height: 150,
                           child: Image.asset(
@@ -164,25 +165,22 @@ class _MainPageState extends State<MainPage> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: () {
-                                // 좋아요 기능넣기
-                              },
-                              icon: Icon(Icons.favorite),
-                              color: Colors.red,
-                            ),
-                            Text("32"),
-                            IconButton(
-                              onPressed: () {
-                                // 스크랩 기능 넣기
-                              },
-                              icon: Icon(Icons.bookmark_rounded),
-                              color: Colors.blue,
-                            ),
-                          ],
-                        )
+                        SizedBox(
+                          width: 150,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              IconButton(
+                                onPressed: () {
+                                  // 좋아요 기능넣기
+                                },
+                                icon: Icon(Icons.favorite),
+                                color: Colors.red,
+                              ),
+                              Text("${index}"),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   );
